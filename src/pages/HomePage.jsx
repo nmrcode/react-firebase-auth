@@ -1,15 +1,25 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { LOGIN_ROUTE } from "../utils/consts/routes";
+import { useAuth } from "../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../store/slices/userSlice";
+import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
-  let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuth, email } = useAuth();
 
-  useEffect(() => {
-    return navigate(LOGIN_ROUTE);
-  }, []);
+  return isAuth ? (
+    <div>
+      <h1>Welcome</h1>
 
-  return <div>HomePage</div>;
+      <button onClick={() => dispatch(removeUser())}>
+        Log out from {email}
+      </button>
+    </div>
+  ) : (
+    <Navigate replace to={LOGIN_ROUTE} />
+  );
 };
 
 export default HomePage;
