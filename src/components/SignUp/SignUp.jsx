@@ -22,7 +22,7 @@ const SignUp = () => {
         );
         navigate("/");
       })
-      .catch(console.error);
+      .catch(() => alert("Пользователь с такой почтой уже существует"));
   };
 
   return <BaseForm title="Зарегистрироваться" handleClick={handleRegister} />;

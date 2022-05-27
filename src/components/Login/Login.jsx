@@ -22,7 +22,7 @@ const Login = () => {
         );
         navigate("/");
       })
-      .catch(console.error);
+      .catch(() => alert("Несуществующий пользователь"));
   };
 
   return <BaseForm title="Войти" handleClick={handleLogin} />;
